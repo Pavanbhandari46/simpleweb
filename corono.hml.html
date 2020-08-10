@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Corona in India</title>
+<style>
+body {margin:0;}
+
+.navbar {
+  overflow: hidden;
+  background-color: LightGray;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.main {
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px;
+</style>
+
+<div class="navbar">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+</div>
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-161136606-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-161136606-1');
+</script>
+<script>
+window.onload = function () {
+   
+var chart = new CanvasJS.Chart("chartContainer1", {
+   animationEnabled: true,
+   
+   title:{
+      text:"State Wise Coronavirus Cases"
+   },
+   axisX:{
+      interval: 1
+   },
+   axisY2:{
+      interlacedColor: "rgba(1,77,101,.2)",
+      gridColor: "rgba(1,77,101,.1)",
+      title: "Number of Companies"
+   },
+   data: [{
+      type: "bar",
+      name: "companies",
+      axisYType: "secondary",
+      color: "#014D65",
+      dataPoints: [
+         { y: 47, label: "Maharastra" },
+      { y: 27, label: "Kerala" },
+      { y: 17, label: "UttarPradesh" },
+      { y: 17, label: "Haryana" },
+      { y: 15, label: "Karnataka" },
+      { y: 11, label: "Delhi" },
+      { y: 8 ,label: "Ladhak" },
+      { y: 13, label: "Telangana" },
+      { y: 2, label: "Rajasthan" },
+      { y: 4, label: "Jammu and Kashmir" },
+      { y: 2, label: "Tamil Nade" },
+      { y: 2, label: "Andhra Pradesh" },
+      { y: 1, label: "Punjab" },
+      { y: 1, label: "Odisha" },
+      { y: 1, label: "Uttarakhand" },
+      { y: 1, label: "Puducherry" },
+      { y: 1, label: "West Bengal" }
+         
+      ]
+   }]
+});
+var chart1 = new CanvasJS.Chart("chartContainer2", {
+   animationEnabled: true,
+   title: {
+      text: "Nationality"
+   },
+   data: [{
+      type: "pie",
+      startAngle: 240,
+      yValueFormatString: "##0.00\"%\"",
+      indexLabel: "{label} {y}",
+      dataPoints: [
+         {y: 81, label: "Indian"},
+         {y: 19, label: "Foreign National"},
+
+      ]
+   }]
+});
+
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+   animationEnabled: true,
+   theme: "light2",
+   title:{
+      text: "Confirmed Covid-19 Patients Per Day"
+   },
+   axisX:{
+      valueFormatString: "DD MMM",
+      crosshair: {
+         enabled: true,
+         snapToDataPoint: true
+      }
+   },
+   axisY: {
+      title: "Number of Patients",
+      crosshair: {
+         enabled: true
+      }
+   },
+   toolTip:{
+      shared:true
+   },  
+   legend:{
+      cursor:"pointer",
+      verticalAlign: "bottom",
+      horizontalAlign: "left",
+      dockInsidePlotArea: true,
+      itemclick: toogleDataSeries
+   },
+   data: [{
+      type: "line",
+      showInLegend: true,
+      name: "Coronavirus Confirm",
+      markerType: "square",
+      xValueFormatString: "DD MMM, YYYY",
+      color: "#F08080",
+      dataPoints: [
+         { x: new Date(2020, 2, 11), y: 19 },
+         { x: new Date(2020, 2, 12), y: 5 },
+         { x: new Date(2020, 2, 13), y: 7 },
+         { x: new Date(2020, 2, 14), y: 11 },
+         { x: new Date(2020, 2, 15), y: 14 },
+         { x: new Date(2020, 2, 16), y: 11 },
+         { x: new Date(2020, 2, 17), y: 20 },
+         { x: new Date(2020, 2, 18), y: 26 }
+         
+      ]
+   },
+   {
+      type: "line",
+      showInLegend: true,
+      name: "Recovered",
+      lineDashType: "dash",
+      dataPoints: [
+         { x: new Date(2020, 2, 11), y: 1 },
+         { x: new Date(2020, 2, 12), y: 0 },
+         { x: new Date(2020, 2, 13), y: 0 },
+         { x: new Date(2020, 2, 14), y: 0 },
+         { x: new Date(2020, 2, 15), y: 0 },
+         { x: new Date(2020, 2, 16), y: 0 },
+         { x: new Date(2020, 2, 17), y: 0 },
+         { x: new Date(2020, 2, 18), y: 0 }
+      ]
+   }]
+});
+chart3.render();
+
+function toogleDataSeries(e){
+   if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+   } else{
+      e.dataSeries.visible = true;
+   }
+   chart3.render();
+}
+
+chart.render();
+chart1.render();
+
+}
+
+
+</script>
+
+
+
+<style type="text/css">
+   
+</style>
+</head>
+
+<br>
+
+<div class="container" style="background-color: DodgerBlue">
+  
+      <div class="row">
+         <div class="col-sm-0" >
+             <img src="virus.jpg" height="500" width="1080" style="display: block;margin-top: 30px; margin-right: auto; margin-left: 30px;" > 
+
+            </div>
+         </div>
+         <div class="col-sm-12" >
+               <div class="jumbotron" style="background-color: #FFFFFF">
+                  <strong>
+               <h2 style="font-weight: bold ;text-align: center;">Coronavirus India Tracker</h2></strong>               
+               <br>
+               <br>
+               <br>
+               <h3 style="font-size:40px; margin-left: 25% ; color: #FF0000;   ">  248 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 4 </h3>
+
+               <h3 style="font-size:20px; margin-left: 23% ">  Confirm &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp Deaths</h3>
+
+               <br>
+               
+               
+               <br>
+               <h3 style="font-size:40px;margin-left: 25%; color: #008000"> 15 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 19 </h3>
+
+               <h3 style="font-size:20px;margin-left: 22%">  Recoverd &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;  &nbsp States</h3>
+               <br>
+               <br>
+               <h6 style="font-size:20px ;font-style: italic;">New Cononavirus Positive Patients -6 </h6>
+               <h6 style="font-size:10px ;font-style: italic;">   &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;             &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;   (It Will Reset at 00:00 AM IST)</h6>
+
+               <h6 style="font-size:30px ;font-style: bold; text-align: center;">World Tracker -221927 </h6>
+               <br>
+               <br>
+               <h3 style="font-size:40px; margin-left: 22% ; color: #FF0000; ">221927 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 8999 </h3>
+
+               <h3 style="font-size:20px ; margin-left: 25% "> Confirm &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp Deaths</h3>
+
+               <br>
+               
+               
+               <br>
+               <h3 style="font-size:40px ; margin-left: 22% ; color: #008000"> 85189  &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 170 </h3>
+
+               <h3 style="font-size:20px ; margin-left: 25% ">  Recoverd &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; Countries</h3>
+
+
+               <br>
+               <br>
+
+<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br>
+<br>
+<div id="chartContainer2" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br>
+<br>
+<div id="chartContainer3" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<br>
+<br>
+
+<div style="background-color: Tomato;font-style: bold">
+               <p><h1 style="font-size:30px ;font-style: italic;">The CDC and the WHO recommend several basic measures to help prevent the spread of Covid-19:</h1>
+<br>
+               <h6 style="margin-left: 60px;"><b>*</b>Wash your hands often for at least 20 seconds.<br>
+               <h6 style="margin-left: 60px;"><b>*</b>Cover your cough or sneeze with a tissue, then throw <h6 style="margin-left: 60px;"><b>*</b>the tissue in the trash.<br>
+               <h6 style="margin-left: 60px;"><b>*</b>Clean and disinfect frequently touched objects.<br>
+                  <h6 style="margin-left: 60px;"><b>*</b>Stay home when you are sick.<br>
+               <h6 style="margin-left: 60px;"><b>*</b>Contact a health worker if you have symptoms; fever and a dry cough are most common.<br>
+               <h6 style="margin-left: 60px;"><b>*</b>DON’T touch your face.<br>
+            <h6 style="margin-left: 60px;"><b>*</b>DON’T travel if you have a fever and cough.<br>
+            <br>
+            <br>
+            <h6 style="font-size:20px ;font-style: italic;">All India Helpline Numbers <a href="https://www.mohfw.gov.in/coronvavirushelplinenumber.pdf">Click Here</a></h6> 
+            <h6 style="font-size:20px ;font-style: italic;">We need more members and developers to contribute in this Project . For Collaboration <a href="https://wa.me/919148047624">Click Here</a></h6> <div>
+            <br>
+            <br>
+            <h6 style="margin-left: 40%">© 2020 Copyright: <a href="https://twitter.com/PiyushRaj66"> Pavan Kumar </a>
+
+            
+         </div>
+         <div class="col-sm-0" >
+               
+         </div>
+      </div>
+   </div>
+   <
+
+
+</body>
+</html>
